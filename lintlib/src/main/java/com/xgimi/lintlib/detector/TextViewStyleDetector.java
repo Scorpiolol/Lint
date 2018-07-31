@@ -45,12 +45,12 @@ public class TextViewStyleDetector extends ResourceXmlDetector {
 
     private static final String SCHEMA = "http://schemas.android.com/apk/res/android";
     private static final String TEXT_APPEARANCE = "text";
-    private static final String TEXTVIEW = "TextView";
+    private static final String TEXT_VIEW = "TextView";
 
     @Nullable
     @Override
     public Collection<String> getApplicableElements() {
-        return Collections.singletonList(TEXTVIEW);
+        return Collections.singletonList(TEXT_VIEW);
     }
 
     @Override

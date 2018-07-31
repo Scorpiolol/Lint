@@ -1,4 +1,4 @@
-package com.xgimi.lintlib.detector;
+package com.xgimi.lintlib.detector.sample;
 
 import com.android.ddmlib.Log;
 import com.android.tools.lint.detector.api.Category;

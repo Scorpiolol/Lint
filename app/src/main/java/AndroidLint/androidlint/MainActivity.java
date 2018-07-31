@@ -15,7 +15,6 @@ import android.util.Log;
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private String lint = "lint";
     private String lint2 = "Log";
 
     @Override
@@ -26,16 +25,32 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "D");
         Log.i(TAG, "D");
         Log.v(TAG, "D");
-        System.out.print("123");
+
+        System.out.print("1231231ahkdjfaisduoifazxjhcuadfaasdfasdf");
         String s = "say lint";
+        String lint = "lint";
         String s1 = lint;
 
+        // 这是一个注释
         getActionBar();
+        test("123");
+        test(null);
+        test01("123", 1);
+        test01("1233", 2);
         AlarmManager alarmManager = null;
         alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, 0, 0, null);
     }
 
-    private void test() {
-        String s = lint;
+    private void test(String test) {
+        String s = test;
+    }
+
+    private void test01(String test, Integer integer) {
+        String s = test;
+        Integer integer1 = integer;
+    }
+
+    public static void test03(String test) {
+        String s = test;
     }
 }

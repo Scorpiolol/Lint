@@ -1,4 +1,4 @@
-package com.xgimi.lintlib.detector;
+package com.xgimi.lintlib.detector.sample;
 
 import com.android.tools.lint.client.api.UElementHandler;
 import com.android.tools.lint.detector.api.Category;
@@ -25,13 +25,14 @@ import java.util.List;
  * copyright 2018 www.xgimi.com Inc. All rights reserved.
  * desc:
  */
-public class XGimiLogDetector extends Detector implements Detector.UastScanner {
+public class NotesDetector extends Detector implements Detector.UastScanner {
 
-    public static final Issue ISSUE = Issue.create(ConfigurationTitle.addTitle("Log"),
-            "1231",
-            "adsdf",
+    public static final Issue ISSUE = Issue.create(ConfigurationTitle.addTitle("Notes"),
+            "注释的双斜线与注释内容之间有且仅有一个空格",
+            "// 这是示例注释，请注意在双斜线之后有一个空格  \n" +
+                    "String test = new String(); ",
             Category.CORRECTNESS, 6, Severity.WARNING,
-            new Implementation(XGimiLogDetector.class, Scope.JAVA_FILE_SCOPE));
+            new Implementation(NotesDetector.class, Scope.JAVA_FILE_SCOPE));
 
     @Override
     public List<Class<? extends UElement>> getApplicableUastTypes() {
@@ -48,9 +49,9 @@ public class XGimiLogDetector extends Detector implements Detector.UastScanner {
                 if (string == null) {
                     return;
                 }
-                if (string.contains("Log") && string.matches(".*\\bLog\\b.*")) {
+                if (string.contains("//") && string.matches(".*\\b//\\b.*")) {
                     context.report(ISSUE, expression, context.getLocation(expression),
-                            "error");
+                            "注释的双斜线与注释内容之间有且仅有一个空格");
                 }
             }
         };

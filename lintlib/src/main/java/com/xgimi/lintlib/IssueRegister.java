@@ -2,10 +2,10 @@ package com.xgimi.lintlib;
 
 import com.android.tools.lint.client.api.IssueRegistry;
 import com.android.tools.lint.detector.api.Issue;
-import com.xgimi.lintlib.detector.MethodDetector;
 import com.xgimi.lintlib.detector.TextViewStyleDetector;
-import com.xgimi.lintlib.detector.XGimiLog2Detector;
-import com.xgimi.lintlib.detector.XGimiLogDetector;
+import com.xgimi.lintlib.detector.log.XGimiLogDetector;
+import com.xgimi.lintlib.detector.log.XGimiPrintDetector;
+import com.xgimi.lintlib.detector.sample.TestDetector;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,13 +19,10 @@ public class IssueRegister extends IssueRegistry {
     public List<Issue> getIssues() {
         System.out.println("*******XSF LINT RULES WORKS*******");
         return Arrays.asList(
-                MethodDetector.ISSUE,
-//                Method2Detector.ISSUE,
                 TextViewStyleDetector.ISSUE,
                 XGimiLogDetector.ISSUE,
-                XGimiLog2Detector.CONDITIONAL,
-                XGimiLog2Detector.WRONG_TAG,
-                XGimiLog2Detector.LONG_TAG);
+                XGimiPrintDetector.ISSUE,
+                TestDetector.ISSUE);
     }
 
     @Override

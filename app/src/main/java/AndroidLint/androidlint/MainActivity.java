@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, 0, 0, null);
     }
 
-    private void test(String test) {
+    private void test(@Nullable String test) {
         String s = test;
     }
 
@@ -53,4 +53,5 @@ public class MainActivity extends AppCompatActivity {
     public static void test03(String test) {
         String s = test;
     }
+
 }

@@ -28,7 +28,7 @@ import java.util.List;
 public class MethodDetector extends Detector implements Detector.ClassScanner {
     private static final String TAG = "MethodDetector";
 
-    public static final Issue ISSUE = Issue.create(ConfigurationTitle.addTitle("LogUtils"),
+    public static final Issue ISSUE = Issue.create(ConfigurationTitle.INSTANCE.addTitle("LogUtils"),
             "用能够区分debug环境的Log工具",
             "请使用由极米提供的Log工具或自己封装好的",
             Category.TYPOGRAPHY, 4, Severity.WARNING,

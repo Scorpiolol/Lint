@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class NotesDetector extends Detector implements Detector.UastScanner {
 
-    public static final Issue ISSUE = Issue.create(ConfigurationTitle.addTitle("Notes"),
+    public static final Issue ISSUE = Issue.create(ConfigurationTitle.INSTANCE.addTitle("Notes"),
             "注释的双斜线与注释内容之间有且仅有一个空格",
             "// 这是示例注释，请注意在双斜线之后有一个空格  \n" +
                     "String test = new String(); ",

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xgimi.lintlib.detector.sample;
+package com.xgimi.lintlib.sample;
 
 import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;

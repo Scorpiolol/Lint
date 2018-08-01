@@ -3,7 +3,7 @@ apply plugin: 'maven'
 
 def MAVEN_LOCAL_PATH = 'http://172.21.16.247:8081/nexus/content/repositories/XgimiApi'
 def ARTIFACT_ID = 'sdk'
-def VERSION_NAME = '1.0.0'
+def VERSION_NAME = '1.0.1'
 def GROUP_ID = 'com.xgimi.lint'
 def ACCOUNT = 'admin'
 def PASSWORD = 'admin123'
@@ -32,7 +32,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -59,15 +59,14 @@ android {
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    api fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     api 'com.android.tools.lint:lint-api:26.1.3'
     api 'com.android.tools.lint:lint-checks:26.1.3'
+    api files('libs/lintlib.jar')
 }
 
 
@@ -75,9 +74,9 @@ dependencies {
  lint相关
  */
 // 依赖所有jar结尾的jar包
-dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-}
+//dependencies {
+//    api fileTree(dir: 'libs', include: ['*.jar'])
+//}
 // 定义方法lintJarImport
 configurations {
     lintJarImport

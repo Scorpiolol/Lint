@@ -1,4 +1,4 @@
-package com.xgimi.lintlib.detector.sample;
+package com.xgimi.lintlib.sample;
 
 import com.android.tools.lint.client.api.UElementHandler;
 import com.android.tools.lint.detector.api.Category;

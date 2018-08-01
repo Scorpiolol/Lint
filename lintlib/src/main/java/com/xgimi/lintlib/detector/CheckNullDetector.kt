@@ -22,10 +22,13 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
         private const val charNullable = "Nullable"
         private const val androidAnnotations = "com.android.annotations."
         private const val supportAnnotation = "android.support.annotation."
+        
         private const val androidNonNull = androidAnnotations + charNonNull
         private const val androidNullable = androidAnnotations + charNullable
+        
         private const val supportNonNull = supportAnnotation + charNonNull
         private const val supportNullable = supportAnnotation + charNullable
+        
         private val annotationArray = arrayOf(supportNonNull, supportNullable, androidNonNull, androidNullable)
         
         @JvmField

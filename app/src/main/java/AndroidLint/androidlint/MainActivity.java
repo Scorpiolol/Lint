@@ -1,6 +1,5 @@
 package AndroidLint.androidlint;
 
-import android.app.AlarmManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -31,14 +30,14 @@ public class MainActivity extends AppCompatActivity {
         String lint = "lint";
         String s1 = lint;
 
-        // 这是一个注释
-        getActionBar();
-        test("123");
-        test(null);
-        test01("123", 1);
-        test01("1233", 2);
-        AlarmManager alarmManager = null;
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, 0, 0, null);
+//        // 这是一个注释
+//        getActionBar();
+//        test("123");
+//        test(null);
+//        test01("123", 1);
+//        test01("1233", 2);
+//        AlarmManager alarmManager = null;
+//        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, 0, 0, null);
     }
 
     private void test(@Nullable String test) {

@@ -1,6 +1,33 @@
+// 依赖于lint的规则的api
 apply plugin: 'java-library'
 apply plugin: "kotlin"
-// 依赖于lint的规则的api
+apply plugin: 'maven'
+
+def MAVEN_LOCAL_PATH = 'http://172.21.16.247:8081/nexus/content/repositories/XgimiApi'
+def ARTIFACT_ID = 'sdk'
+def VERSION_NAME = '1.0.1'
+def GROUP_ID = 'com.xgimi.lint'
+def ACCOUNT = 'admin'
+def PASSWORD = 'admin123'
+
+//脚本：将Lib打成aar包上传至maven私有库
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: MAVEN_LOCAL_PATH) {
+                authentication(userName: ACCOUNT, password: PASSWORD)
+            }
+            pom.project {
+                groupId GROUP_ID
+                artifactId ARTIFACT_ID
+                version VERSION_NAME
+                packaging 'aar'
+            }
+        }
+    }
+}
+
+
 
 dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -10,7 +37,9 @@ dependencies {
 }
 
 /**
- * Lint-Registry是透露给lint工具的注册类的方法，也就是PermissionIssueRegistry是lint工具的入口,同时也通过这个方法进行打jar包
+ * Lint-Registry是透露给lint工具的注册类的方法
+ * 也就是PermissionIssueRegistry是lint工具的入口
+ * 同时也通过这个方法进行打jar包
  */
 jar {
     manifest {

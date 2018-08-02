@@ -22,11 +22,11 @@ class TextViewStyleDetector : ResourceXmlDetector() {
         private val CATEGORY = Category.TYPOGRAPHY
         private const val PRIORITY = 4
         private val SEVERITY = Severity.WARNING
-    
+        
         @JvmField
         val ISSUE = Issue.create(
                 ConfigurationTitle.addTitle(ID),
-                DESCRIPTION,
+                ConfigurationTitle.addTitle(DESCRIPTION),
                 EXPLANATION,
                 CATEGORY,
                 PRIORITY,

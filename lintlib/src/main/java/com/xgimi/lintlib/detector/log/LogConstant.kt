@@ -19,7 +19,7 @@ object LogConstant {
     val CATEGORY = Category.CORRECTNESS
     val SEVERITY = Severity.WARNING
     const val LEVEL = 5
-    const val MESSAGE = "使用错误的Log方式"
+    val MESSAGE = ConfigurationTitle.addTitle("使用错误的Log方式")
     
     const val LOG = "LogUtils"
     

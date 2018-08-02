@@ -33,7 +33,7 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
         
         @JvmField
         val ISSUE = Issue.create(ConfigurationTitle.addTitle(ConfigurationTitle.addTitle("参数")),
-                "请标记 @$charNullable 或 @$charNonNull",
+                ConfigurationTitle.addTitle("请标记 @$charNullable 或 @$charNonNull"),
                 "给参数标记 @$charNullable 或 @$charNonNull，可以使代码更健壮，也使之后转Kotlin容错更高",
                 Category.CORRECTNESS, 4, Severity.WARNING,
                 Implementation(CheckNullDetector::class.java, Scope.JAVA_FILE_SCOPE))
@@ -62,7 +62,7 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
                 }
             }
             if (!isCheckPass) mContext.report(ISSUE, node.uastAnchor, mContext.getLocation(node.uastAnchor!!),
-                    "请标记 @$charNullable 或 @$charNonNull",
+                    ConfigurationTitle.addTitle("请标记 @$charNullable 或 @$charNonNull"),
                     initFixGroup(mContext, node)
             )
         }
@@ -72,7 +72,7 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
         val location = mContext.getLocation(node.typeElement!!)
         val name = node.text!!.replace(" " + node.name!!, "")
         return LintFix.create()
-                .name("添加@$with")
+                .name(ConfigurationTitle.addTitle("添加@$with"))
                 .replace()
                 .all()
                 .range(location)

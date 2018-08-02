@@ -2,6 +2,7 @@ package com.xgimi.lintlib.detector.log
 
 import com.android.tools.lint.detector.api.*
 import com.intellij.psi.PsiMethod
+import com.xgimi.lintlib.util.ConfigurationTitle
 import org.jetbrains.uast.UCallExpression
 import java.util.*
 
@@ -34,7 +35,7 @@ class XGimiPrintDetector : Detector(), SourceCodeScanner {
     private fun initFix(replace: String): LintFix {
         return LintFix
                 .create()
-                .name("使用${LogConstant.LOG}")
+                .name(ConfigurationTitle.addTitle("使用${LogConstant.LOG}"))
                 .replace()
                 .all()
                 .pattern("System\\.out\\.$replace\\(")

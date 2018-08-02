@@ -12,6 +12,6 @@ import com.android.annotations.Nullable
 object ConfigurationTitle {
     
     fun addTitle(@Nullable title: String): String {
-        return "XGimi_$title"
+        return "XGimi : $title"
     }
 }

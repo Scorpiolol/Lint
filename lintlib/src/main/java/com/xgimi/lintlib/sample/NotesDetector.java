@@ -28,9 +28,8 @@ import java.util.List;
 public class NotesDetector extends Detector implements Detector.UastScanner {
 
     public static final Issue ISSUE = Issue.create(ConfigurationTitle.INSTANCE.addTitle("Notes"),
-            "注释的双斜线与注释内容之间有且仅有一个空格",
-            "// 这是示例注释，请注意在双斜线之后有一个空格  \n" +
-                    "String test = new String(); ",
+            "这是一个描述",
+            " 这是展开 ",
             Category.CORRECTNESS, 6, Severity.WARNING,
             new Implementation(NotesDetector.class, Scope.JAVA_FILE_SCOPE));
 
@@ -49,9 +48,9 @@ public class NotesDetector extends Detector implements Detector.UastScanner {
                 if (string == null) {
                     return;
                 }
-                if (string.contains("//") && string.matches(".*\\b//\\b.*")) {
+                if (string.contains("Log") && string.matches(".*\\bLog\\b.*")) {
                     context.report(ISSUE, expression, context.getLocation(expression),
-                            "注释的双斜线与注释内容之间有且仅有一个空格");
+                            "这是一个提示");
                 }
             }
         };

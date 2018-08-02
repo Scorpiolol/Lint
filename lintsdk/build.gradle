@@ -1,30 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
-
-def MAVEN_LOCAL_PATH = 'http://172.21.16.247:8081/nexus/content/repositories/XgimiApi'
-def ARTIFACT_ID = 'sdk'
-def VERSION_NAME = '1.0.1'
-def GROUP_ID = 'com.xgimi.lint'
-def ACCOUNT = 'admin'
-def PASSWORD = 'admin123'
-
-//脚本：将Lib打成aar包上传至maven私有库
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: MAVEN_LOCAL_PATH) {
-                authentication(userName: ACCOUNT, password: PASSWORD)
-            }
-            pom.project {
-                groupId GROUP_ID
-                artifactId ARTIFACT_ID
-                version VERSION_NAME
-                packaging 'aar'
-            }
-        }
-    }
-}
-
 
 android {
     compileSdkVersion 27

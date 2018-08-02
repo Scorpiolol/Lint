@@ -19,15 +19,27 @@ class XGimiPrintDetector : Detector(), SourceCodeScanner {
         
         @JvmField
         val ISSUE = Issue.create(
-                LogIssue.ID + ":print",
-                LogIssue.DESCRIPTION,
-                LogIssue.EXPLANATION,
-                LogIssue.CATEGORY,
-                LogIssue.LEVEL,
-                LogIssue.SEVERITY,
+                LogConstant.ID + "print",
+                LogConstant.DESCRIPTION,
+                LogConstant.EXPLANATION,
+                LogConstant.CATEGORY,
+                LogConstant.LEVEL,
+                LogConstant.SEVERITY,
                 IMPLEMENTATION)
         
         private const val LOG_CLS = "java.io.PrintStream"
+        
+    }
+    
+    private fun initFix(replace: String): LintFix {
+        return LintFix
+                .create()
+                .name("使用${LogConstant.LOG}")
+                .replace()
+                .all()
+                .pattern("System\\.out\\.$replace\\(")
+                .with("${LogConstant.LOG}.d(TAG,")
+                .build()!!
     }
     
     override fun getApplicableMethodNames(): List<String>? =
@@ -43,7 +55,7 @@ class XGimiPrintDetector : Detector(), SourceCodeScanner {
             return
         }
         if (context.isEnabled(ISSUE)) {
-            context.report(ISSUE, node, context.getLocation(node), LogIssue.MESSAGE)
+            context.report(ISSUE, node, context.getLocation(node), LogConstant.MESSAGE, initFix(method.name))
         }
     }
 }

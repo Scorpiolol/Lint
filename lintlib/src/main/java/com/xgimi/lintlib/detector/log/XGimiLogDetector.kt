@@ -19,17 +19,27 @@ class XGimiLogDetector : Detector(), SourceCodeScanner {
         
         @JvmField
         val ISSUE = Issue.create(
-                LogIssue.ID + ":Log",
-                LogIssue.DESCRIPTION,
-                LogIssue.EXPLANATION,
-                LogIssue.CATEGORY,
-                LogIssue.LEVEL,
-                LogIssue.SEVERITY,
+                LogConstant.ID + "Log",
+                LogConstant.DESCRIPTION,
+                LogConstant.EXPLANATION,
+                LogConstant.CATEGORY,
+                LogConstant.LEVEL,
+                LogConstant.SEVERITY,
                 IMPLEMENTATION)
         
         private const val IS_LOGGABLE = "isLoggable"
         private const val LOG_CLS = "android.util.Log"
         private const val PRINTLN = "println"
+        
+        val logFix: LintFix = LintFix
+                .create()
+                .name("使用${LogConstant.LOG}")
+                .replace()
+                .all()
+                .pattern("Log")
+                .with(LogConstant.LOG)
+                .build()
+        
     }
     
     override fun getApplicableMethodNames(): List<String>? =
@@ -49,7 +59,12 @@ class XGimiLogDetector : Detector(), SourceCodeScanner {
             return
         }
         if (context.isEnabled(ISSUE)) {
-            context.report(ISSUE, node, context.getLocation(node), LogIssue.MESSAGE)
+            context.report(ISSUE,
+                    node,
+                    context.getLocation(node),
+                    LogConstant.MESSAGE,
+                    logFix)
         }
     }
+    
 }

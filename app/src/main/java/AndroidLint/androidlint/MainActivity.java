@@ -1,6 +1,7 @@
 package AndroidLint.androidlint;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.w(TAG, "test: ");
         Log.d(TAG, "D");
         Log.i(TAG, "D");
         Log.v(TAG, "D");
@@ -30,21 +30,21 @@ public class MainActivity extends AppCompatActivity {
         String lint = "lint";
         String s1 = lint;
 
-//        // 这是一个注释
-//        getActionBar();
-//        test("123");
-//        test(null);
-//        test01("123", 1);
-//        test01("1233", 2);
-//        AlarmManager alarmManager = null;
-//        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, 0, 0, null);
+        // // 这是一个注释
+        // getActionBar();
+        // test("123");
+        // test(null);
+        // test01("123", 1);
+        // test01("1233", 2);
+        // AlarmManager alarmManager = null;
+        // alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, 0, 0, null);
     }
 
     private void test(@Nullable String test) {
         String s = test;
     }
 
-    private void test01(String test, Integer integer) {
+    private void test01(@NonNull String test, Integer integer) {
         String s = test;
         Integer integer1 = integer;
     }

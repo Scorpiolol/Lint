@@ -5,7 +5,7 @@ apply plugin: 'maven'
 
 def MAVEN_LOCAL_PATH = 'http://172.21.16.247:8081/nexus/content/repositories/XgimiApi'
 def ARTIFACT_ID = 'sdk'
-def VERSION_NAME = '1.0.1'
+def VERSION_NAME = '1.0.0'
 def GROUP_ID = 'com.xgimi.lint'
 def ACCOUNT = 'admin'
 def PASSWORD = 'admin123'

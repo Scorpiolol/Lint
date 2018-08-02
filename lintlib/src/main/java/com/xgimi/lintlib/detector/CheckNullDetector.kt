@@ -32,7 +32,7 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
         private val annotationArray = arrayOf(supportNonNull, supportNullable, androidNonNull, androidNullable)
         
         @JvmField
-        val ISSUE = Issue.create(ConfigurationTitle.addTitle("参数"),
+        val ISSUE = Issue.create(ConfigurationTitle.addTitle(ConfigurationTitle.addTitle("参数")),
                 "请标记 @$charNullable 或 @$charNonNull",
                 "给参数标记 @$charNullable 或 @$charNonNull，可以使代码更健壮，也使之后转Kotlin容错更高",
                 Category.CORRECTNESS, 4, Severity.WARNING,
@@ -62,10 +62,32 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
                 }
             }
             if (!isCheckPass) mContext.report(ISSUE, node.uastAnchor, mContext.getLocation(node.uastAnchor!!),
-                    "请标记 @$charNullable 或 @$charNonNull")
-            
+                    "请标记 @$charNullable 或 @$charNonNull",
+                    initFixGroup(mContext, node)
+            )
         }
     }
     
+    private fun createLintFix(mContext: JavaContext, node: UParameter, with: String): LintFix {
+        val location = mContext.getLocation(node.typeElement!!)
+        val name = node.text!!.replace(" " + node.name!!, "")
+        return LintFix.create()
+                .name("添加@$with")
+                .replace()
+                .all()
+                .range(location)
+                .with("@$with $name")
+                .build()
+    }
     
+    private fun initFixGroup(mContext: JavaContext, node: UParameter): LintFix {
+        return createFixGroup(
+                createLintFix(mContext, node, charNullable),
+                createLintFix(mContext, node, charNonNull)
+        )
+    }
+    
+    private fun createFixGroup(vararg lintFix: LintFix): LintFix {
+        return LintFix.create().group(*lintFix)
+    }
 }

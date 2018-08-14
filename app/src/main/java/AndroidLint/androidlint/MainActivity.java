@@ -1,7 +1,6 @@
 package AndroidLint.androidlint;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         String s = test;
     }
 
-    private void test01(@NonNull String test, Integer integer) {
+    private void test01(String test, Integer integer, int mInt) {
         String s = test;
         Integer integer1 = integer;
     }

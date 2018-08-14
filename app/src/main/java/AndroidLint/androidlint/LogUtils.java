@@ -1,13 +1,11 @@
 package AndroidLint.androidlint;
 
-import android.annotation.SuppressLint;
 import android.util.Log;
 
 /**
  * @author zcy.
  * @date 2017/12/29.
  */
-@SuppressLint({"XGimi_错误的使用方式 :Log", "XGimi_参数"})
 public class LogUtils {
 
     private static final String TAG = "way";

@@ -22,6 +22,7 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
         private const val charNullable = "Nullable"
         private const val androidAnnotations = "com.android.annotations."
         private const val supportAnnotation = "android.support.annotation."
+        private const val rxAnnotation = "io.reactivex.annotations."
         
         private const val androidNonNull = androidAnnotations + charNonNull
         private const val androidNullable = androidAnnotations + charNullable
@@ -29,7 +30,14 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
         private const val supportNonNull = supportAnnotation + charNonNull
         private const val supportNullable = supportAnnotation + charNullable
         
-        private val annotationArray = arrayOf(supportNonNull, supportNullable, androidNonNull, androidNullable)
+        private const val rxNonNull = rxAnnotation + charNullable
+        private const val rxNullable = rxAnnotation + charNullable
+        
+        private val annotationArray = arrayOf(supportNonNull, supportNullable,
+                androidNonNull, androidNullable,
+                rxNonNull, rxNullable)
+        
+        private val passArray = arrayOf("int", "double", "float", "short", "boolean", "byte", "long", "char")
         
         @JvmField
         val ISSUE = Issue.create(ConfigurationTitle.addTitle(ConfigurationTitle.addTitle("参数")),
@@ -61,6 +69,11 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
                     break
                 }
             }
+            val typeName = getTypeName(node)
+            for (i in passArray.indices) {
+                if (typeName.contains(passArray[i])) return
+            }
+            
             if (!isCheckPass) mContext.report(ISSUE, node.uastAnchor, mContext.getLocation(node.uastAnchor!!),
                     ConfigurationTitle.addTitle("请标记 @$charNullable 或 @$charNonNull"),
                     initFixGroup(mContext, node)
@@ -70,7 +83,7 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
     
     private fun createLintFix(mContext: JavaContext, node: UParameter, with: String): LintFix {
         val location = mContext.getLocation(node.typeElement!!)
-        val name = node.text!!.replace(" " + node.name!!, "")
+        val name = getTypeName(node)
         return LintFix.create()
                 .name(ConfigurationTitle.addTitle("添加@$with"))
                 .replace()
@@ -89,5 +102,9 @@ class CheckNullDetector : Detector(), SourceCodeScanner {
     
     private fun createFixGroup(vararg lintFix: LintFix): LintFix {
         return LintFix.create().group(*lintFix)
+    }
+    
+    private fun getTypeName(node: UParameter): String {
+        return node.text!!.replace(" " + node.name!!, "")
     }
 }
